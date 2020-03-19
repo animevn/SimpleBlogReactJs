@@ -1,9 +1,9 @@
 import React, {useContext} from "react";
-import {AuthContext} from "../firebase/Auth";
 import UserIcon from "./UserIcon";
+import {ShareRoute} from "./ShareRoutes";
 
-function Header(props) {
-  const {currentUser} = useContext(AuthContext);
+function Header() {
+  const {route} = useContext(ShareRoute);
 
   return (
     <div className="container-fluid bg-warning shadow px-0">
@@ -20,18 +20,18 @@ function Header(props) {
               <div className="brand-text text-center">BLOG WORLD</div>
             </a>
 
-            <UserIcon currentUser={currentUser}/>
+            <UserIcon/>
           </div>
 
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ml-auto">
-            <li className={"nav-item " + props.home}>
+            <li className={"nav-item " + route.home}>
               <a className="nav-link font-weight-bold" href="/">HOME</a>
             </li>
-            <li className={"nav-item " + props.about}>
+            <li className={"nav-item " + route.about}>
               <a className="nav-link font-weight-bold" href="/about">ABOUT US</a>
             </li>
-            <li className={"nav-item " + props.contact}>
+            <li className={"nav-item " + route.contact}>
               <a className="nav-link font-weight-bold" href="/contact">CONTACT US</a>
               </li>
             </ul>

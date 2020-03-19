@@ -1,21 +1,24 @@
-import React from "react";
+import React, {useContext} from "react";
 import firebase from "../firebase/Firebase";
+import {AuthContext} from "../firebase/Auth";
 
-function UserIcon(props) {
+function UserIcon() {
+
+  const {currentUser} = useContext(AuthContext);
 
   function onLogoutClick() {
-    if (props.currentUser){
+    if (currentUser){
       firebase.auth().signOut().catch(err=>alert(err));
     }
   }
 
   function onDeleteUser() {
-    if (props.currentUser){
+    if (currentUser){
       firebase.auth().currentUser.delete().catch(err=>alert(err));
     }
   }
 
-  if (props.currentUser){
+  if (currentUser){
     return (
       <div className="dropdown">
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
@@ -26,7 +29,7 @@ function UserIcon(props) {
         </a>
         <div className="dropdown-menu dropdown-menu-right bg-warning">
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a className="dropdown-item">{props.currentUser.email}</a>
+          <a className="dropdown-item">{currentUser.email}</a>
           <button className="dropdown-item" onClick={onDeleteUser}>Delete Account</button>
           <div className="dropdown-divider"></div>
           <a className="dropdown-item" href="/">Profile</a>

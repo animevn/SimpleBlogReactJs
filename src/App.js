@@ -8,26 +8,34 @@ import Register from "./routes/Register";
 import Home from "./routes/Home";
 import About from "./routes/About";
 import Contact from "./routes/Contact";
+import Header from "./frame/Header";
+import {ShareRouteProvider} from "./frame/ShareRoutes";
 
 function App() {
 
   return (
     <div className="main">
+      <div className="container-fluid px-0">
         {/*app goes in here*/}
 
         <AuthProvider>
-          <BrowserRouter>
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/about" component={About}/>
-            <Route exact path="/contact" component={Contact}/>
-            <Route exact path="/login" component={Login}/>
-            <Route exact path="/signin" component={SignIn}/>
-            <Route exact path="/register" component={Register}/>
-          </BrowserRouter>
+          <ShareRouteProvider>
+            <Header/>
+
+            <BrowserRouter>
+              <Route exact path="/" component={Home}/>
+              <Route exact path="/about" component={About}/>
+              <Route exact path="/contact" component={Contact}/>
+              <Route exact path="/login" component={Login}/>
+              <Route exact path="/signin" component={SignIn}/>
+              <Route exact path="/register" component={Register}/>
+            </BrowserRouter>
+
+          </ShareRouteProvider>
         </AuthProvider>
 
         {/*app goes in here*/}
-
+      </div>
       <Footer/>
     </div>
   );
