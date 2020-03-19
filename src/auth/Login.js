@@ -3,7 +3,7 @@ import {withRouter, Redirect} from "react-router-dom";
 import firebase from "../firebase/Firebase";
 import {AuthContext} from "../firebase/Auth";
 
-const Home = ({history})=>{
+const Login = ({history})=>{
   const {currentUser} = useContext(AuthContext);
   if (currentUser) return <Redirect to="/profile"/>;
 
@@ -49,4 +49,4 @@ const Home = ({history})=>{
   );
 };
 
-export default withRouter(Home);
+export default withRouter(Login);
