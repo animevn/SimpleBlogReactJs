@@ -10,6 +10,7 @@ import About from "./routes/About";
 import Contact from "./routes/Contact";
 
 function App() {
+
   return (
     <div className="main">
         {/*app goes in here*/}

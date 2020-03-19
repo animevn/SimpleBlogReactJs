@@ -1,6 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
+import {AuthContext} from "../firebase/Auth";
+import UserIcon from "./UserIcon";
 
 function Header(props) {
+  const {currentUser} = useContext(AuthContext);
+
   return (
     <div className="container-fluid bg-warning shadow px-0">
       <div className="container">
@@ -16,10 +20,7 @@ function Header(props) {
               <div className="brand-text text-center">BLOG WORLD</div>
             </a>
 
-            <a className="navbar-brand brand-image" href="/login">
-              <img className="profile-image" src="/images/user-circle.svg" alt="user-not-login"/>
-            </a>
-
+            <UserIcon currentUser={currentUser}/>
           </div>
 
           <div className="collapse navbar-collapse" id="navbarNav">

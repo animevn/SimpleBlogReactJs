@@ -6,16 +6,14 @@ import Header from "../frame/Header";
 
 const SignIn = ()=>{
   const {currentUser}= useContext(AuthContext);
-  if (currentUser) return <Redirect to="/profile"/>;
+  if (currentUser) return <Redirect to="/"/>;
 
   const handleSignIn = (event)=>{
     event.preventDefault();
     const {email, password} = event.target.elements;
-    try{
-      firebase.auth().signInWithEmailAndPassword(email.value, password.value);
-    }catch (e) {
-      alert(e);
-    }
+    firebase.auth().signInWithEmailAndPassword(email.value, password.value).catch(err=>{
+      alert(err);
+    });
   };
 
   return (
