@@ -30,7 +30,6 @@ function EditButtons(props) {
               Delete
             </button>
           </form>
-
         </div>
       </div>
     );

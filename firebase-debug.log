@@ -1,0 +1,25 @@
+[debug] [2020-03-20T09:26:58.957Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T09:26:58.960Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2020-03-20T09:26:58.960Z] CLI Version:   7.13.1
+[debug] [2020-03-20T09:26:58.960Z] Platform:      darwin
+[debug] [2020-03-20T09:26:58.961Z] Node Version:  v10.19.0
+[debug] [2020-03-20T09:26:58.962Z] Time:          Fri Mar 20 2020 16:26:58 GMT+0700 (Indochina Time)
+[debug] [2020-03-20T09:26:58.962Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T09:26:58.962Z] 
+[debug] [2020-03-20T09:26:58.975Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-20T09:26:58.975Z] > authorizing via signed-in user
+[debug] [2020-03-20T09:26:58.975Z] [iam] checking project bloggerpod for permissions ["firebase.projects.get"]
+[debug] [2020-03-20T09:26:58.978Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/bloggerpod:testIamPermissions  
+
+[debug] [2020-03-20T09:27:00.430Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T09:27:00.433Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/bloggerpod  
+ 
+[debug] [2020-03-20T09:27:01.144Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/haanh/@js/react/simple-blog'...
+[info] 
+[debug] [2020-03-20T09:27:01.150Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/bloggerpod/webApps/-/config  
+ 
+[debug] [2020-03-20T09:27:02.472Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: build
+[info] ✔  hosting: Local server: http://localhost:5000
