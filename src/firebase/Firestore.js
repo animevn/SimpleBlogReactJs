@@ -8,10 +8,10 @@ export const FirestoreProvider = ({children})=>{
   const group = firebase.firestore().collectionGroup("blogs");
 
   useEffect(()=>{
-    group.get().then(snapshot => {
+    group.onSnapshot(snapshot => {
       setPosts([]);
       snapshot.forEach(doc=>setPosts(old=>[doc.data(), ...old]));
-    }).catch(err=>console.log(err));
+    });
     // eslint-disable-next-line
   }, []);
 
