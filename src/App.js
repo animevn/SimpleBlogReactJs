@@ -10,6 +10,7 @@ import About from "./routes/About";
 import Contact from "./routes/Contact";
 import Header from "./frame/Header";
 import {ShareRouteProvider} from "./frame/ShareRoutes";
+import AddPost from "./routes/AddPost";
 
 function App() {
 
@@ -20,15 +21,16 @@ function App() {
 
         <AuthProvider>
           <ShareRouteProvider>
-            <Header/>
 
             <BrowserRouter>
+              <Header/>
               <Route exact path="/" component={Home}/>
               <Route exact path="/about" component={About}/>
               <Route exact path="/contact" component={Contact}/>
               <Route exact path="/login" component={Login}/>
               <Route exact path="/signin" component={SignIn}/>
               <Route exact path="/register" component={Register}/>
+              <Route exact path="/addpost" component={AddPost}/>
             </BrowserRouter>
 
           </ShareRouteProvider>

@@ -4,19 +4,19 @@ import firebase from "./Firebase";
 export const FirestoreContext = createContext(null);
 
 export const FirestoreCollection = ({children})=>{
-  const [post, setPost] = useState([]);
+  const [posts, setPosts] = useState([]);
   const db = firebase.firestore().collection("blog");
 
   useEffect(()=>{
     db.onSnapshot(snapshot => {
-      setPost([]);
-      snapshot.forEach(doc=>setPost(old=>[doc.data(), ...old]));
+      setPosts([]);
+      snapshot.forEach(doc=>setPosts(old=>[doc.data(), ...old]));
     });
     // eslint-disable-next-line
   }, []);
 
   return (
-    <FirestoreContext.Provider value={{post}}>
+    <FirestoreContext.Provider value={{posts}}>
       {children}
     </FirestoreContext.Provider>
   );
