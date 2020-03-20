@@ -1,8 +1,9 @@
 import React, {useContext} from "react";
 import firebase from "../firebase/Firebase";
 import {AuthContext} from "../firebase/Auth";
+import {withRouter} from "react-router-dom";
 
-function UserIcon() {
+function UserIcon({history}) {
 
   const {currentUser} = useContext(AuthContext);
 
@@ -16,6 +17,10 @@ function UserIcon() {
     if (currentUser){
       firebase.auth().currentUser.delete().catch(err=>alert(err));
     }
+  }
+
+  function login(){
+    history.push("/login");
   }
 
   if (currentUser){
@@ -42,11 +47,11 @@ function UserIcon() {
     )
   }else {
     return (
-      <a className="navbar-brand brand-image" href="/login">
+      <button className="navbar-brand brand-image btn" onClick={login}>
         <img className="profile-image" src="/images/user-circle.svg" alt="user-not-login"/>
-      </a>
+      </button>
     )
   }
 }
 
-export default UserIcon;
+export default withRouter(UserIcon);

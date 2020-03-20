@@ -27,12 +27,19 @@ function Home({history}) {
   ) : null;
 
   const showPosts = posts.map((post, index)=>{
+    function onUrlClick() {
+      history.push(post.url);
+    }
+
     return (
-      <div key={index} className="container pl-0">
-        <h2>{post.title}</h2>
+      <div key={index} className="container px-0">
+
         <p className="text-justify my-3">
+          <h2>{post.title}</h2>
           {post.body.substring(0, 100) + " ..."}
-          <a className="text-link" href={post.url}>Read more</a>
+          <button className="text-link btn mb-1" onClick={onUrlClick}>
+            Read more
+          </button>
         </p>
       </div>
     );
