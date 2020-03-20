@@ -1,20 +1,24 @@
 import React, {useContext} from "react";
-import {useParams} from "react-router-dom";
+import {useParams, withRouter} from "react-router-dom";
 import {FirestoreContext} from "../firebase/Firestore";
 import EditButtons from "../frame/EditButton";
 
 
-function Post() {
+function Post({history}) {
   const {url} = useParams();
   const {posts} = useContext(FirestoreContext);
 
   const showPost = posts.filter(post=> {return post.url === url});
 
+  function comeback() {
+    history.push("/");
+  }
+
   if (showPost.length > 0){
     const post = showPost[0];
     return (
       <div className="container">
-        <EditButtons post={post}/>
+        <EditButtons post={post} backToHome={comeback}/>
 
         <div className="container mt-1">
           <h2 className="pt-4">{post.title}</h2>
@@ -27,4 +31,4 @@ function Post() {
   }
 }
 
-export default Post;
+export default withRouter(Post);

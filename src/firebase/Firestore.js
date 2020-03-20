@@ -10,7 +10,7 @@ export const FirestoreProvider = ({children})=>{
   useEffect(()=>{
     group.onSnapshot(snapshot => {
       setPosts([]);
-      snapshot.forEach(doc=>setPosts(old=>[doc.data(), ...old]));
+      snapshot.forEach(doc=>setPosts(old=>[{...doc.data(), postId: doc.id}, ...old]));
     });
     // eslint-disable-next-line
   }, []);
