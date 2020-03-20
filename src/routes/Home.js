@@ -33,9 +33,8 @@ function Home({history}) {
 
     return (
       <div key={index} className="container px-0">
-
+        <h2>{post.title}</h2>
         <p className="text-justify my-3">
-          <h2>{post.title}</h2>
           {post.body.substring(0, 100) + " ..."}
           <button className="text-link btn mb-1" onClick={onUrlClick}>
             Read more
