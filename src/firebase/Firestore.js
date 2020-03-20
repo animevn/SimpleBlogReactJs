@@ -3,39 +3,20 @@ import firebase from "./Firebase";
 
 export const FirestoreContext = createContext(null);
 
-export const FirestoreCollection = ({children})=>{
+export const FirestoreProvider = ({children})=>{
   const [posts, setPosts] = useState([]);
-  const db = firebase.firestore().collection("blog");
+  const group = firebase.firestore().collectionGroup("blogs");
 
   useEffect(()=>{
-    db.onSnapshot(snapshot => {
+    group.get().then(snapshot => {
       setPosts([]);
       snapshot.forEach(doc=>setPosts(old=>[doc.data(), ...old]));
-    });
+    }).catch(err=>console.log(err));
     // eslint-disable-next-line
   }, []);
 
   return (
     <FirestoreContext.Provider value={{posts}}>
-      {children}
-    </FirestoreContext.Provider>
-  );
-};
-
-export const FirestoreGroup = ({children})=>{
-  const [post, setPost] = useState([]);
-  const group = firebase.firestore().collectionGroup("blogs");
-
-  useEffect(()=>{
-    group.onSnapshot(snapshot => {
-      setPost([]);
-      snapshot.forEach(doc=>setPost(old=>[doc.data(), ...old]));
-    });
-    // eslint-disable-next-line
-  }, []);
-
-  return (
-    <FirestoreContext.Provider value={{post}}>
       {children}
     </FirestoreContext.Provider>
   );

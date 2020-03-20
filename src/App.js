@@ -11,6 +11,7 @@ import Contact from "./routes/Contact";
 import Header from "./frame/Header";
 import {ShareRouteProvider} from "./frame/ShareRoutes";
 import AddPost from "./routes/AddPost";
+import {FirestoreProvider} from "./firebase/Firestore";
 
 function App() {
 
@@ -20,11 +21,13 @@ function App() {
         {/*app goes in here*/}
 
         <AuthProvider>
-          <ShareRouteProvider>
 
+          <ShareRouteProvider>
             <BrowserRouter>
               <Header/>
-              <Route exact path="/" component={Home}/>
+              <FirestoreProvider>
+                <Route exact path="/" component={Home}/>
+              </FirestoreProvider>
               <Route exact path="/about" component={About}/>
               <Route exact path="/contact" component={Contact}/>
               <Route exact path="/login" component={Login}/>
@@ -32,8 +35,8 @@ function App() {
               <Route exact path="/register" component={Register}/>
               <Route exact path="/addpost" component={AddPost}/>
             </BrowserRouter>
-
           </ShareRouteProvider>
+
         </AuthProvider>
 
         {/*app goes in here*/}
