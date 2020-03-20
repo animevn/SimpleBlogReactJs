@@ -12,13 +12,16 @@ function EditButtons(props) {
     props.backToHome();
   };
 
+  const onEditClick = ()=>{
+    props.backToEdit(props.post);
+  };
+
   if (currentUser && currentUser.uid === props.post.author){
     return (
       <div className="container pt-1">
         <div className="btn-group float-right shadow">
           <form className="btn-group">
-            <button className="btn btn-group btn-success btn-lg"
-                    name="edit" type="submit">
+            <button className="btn btn-group btn-success btn-lg" onClick={onEditClick}>
               &nbsp; Edit &nbsp;
             </button>
           </form>

@@ -14,11 +14,15 @@ function Post({history}) {
     history.push("/");
   }
 
+  function edit(post) {
+    history.push({pathname:"/editpost", search:"", state:{...post}});
+  }
+
   if (showPost.length > 0){
     const post = showPost[0];
     return (
       <div className="container">
-        <EditButtons post={post} backToHome={comeback}/>
+        <EditButtons post={post} backToHome={comeback} backToEdit={edit}/>
 
         <div className="container mt-1">
           <h2 className="pt-4">{post.title}</h2>

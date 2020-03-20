@@ -13,6 +13,7 @@ import {ShareRouteProvider} from "./frame/ShareRoutes";
 import AddPost from "./routes/AddPost";
 import {FirestoreProvider} from "./firebase/Firestore";
 import Post from "./routes/Post";
+import EditPost from "./routes/EditPost";
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
               <Route exact path="/signin" component={SignIn}/>
               <Route exact path="/register" component={Register}/>
               <Route exact path="/addpost" component={AddPost}/>
+              <Route exact path="/editpost" component={EditPost}/>
 
               <FirestoreProvider>
                 <Route path="/:url" component={Post}/>
