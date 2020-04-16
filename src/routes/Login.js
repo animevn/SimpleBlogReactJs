@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {withRouter, Redirect, useHistory} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import firebase from "../firebase/Firebase";
 import {AuthContext} from "../firebase/Auth";
 import Grid from "@material-ui/core/Grid";
@@ -19,7 +19,7 @@ const Login = ()=>{
     let provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope("profile");
     provider.addScope("email");
-    firebase.auth().signInWithPopup(provider);
+    firebase.auth().signInWithPopup(provider).then();
   }
 
   function onSignInClick() {
@@ -82,4 +82,4 @@ const Login = ()=>{
   );
 };
 
-export default withRouter(Login);
+export default Login;

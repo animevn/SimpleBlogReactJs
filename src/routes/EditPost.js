@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
 import firebase from "../firebase/Firebase";
-import {withRouter, useLocation} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 
-function EditPost({history}) {
+function EditPost() {
   const location = useLocation();
+  const history = useHistory();
   const [state, setState] = useState({title:"", body:""});
 
   useEffect(()=>{
@@ -82,4 +83,4 @@ function EditPost({history}) {
   )
 }
 
-export default withRouter(EditPost);
+export default EditPost;

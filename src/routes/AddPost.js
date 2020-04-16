@@ -1,9 +1,10 @@
 import React, {useContext} from "react";
 import firebase from "../firebase/Firebase";
 import {AuthContext} from "../firebase/Auth";
-import {withRouter} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
-function AddPost({history}) {
+function AddPost() {
+  const history = useHistory();
   const {currentUser} = useContext(AuthContext);
 
   function handleSubmit(event) {
@@ -71,4 +72,4 @@ function AddPost({history}) {
   )
 }
 
-export default withRouter(AddPost);
+export default AddPost;

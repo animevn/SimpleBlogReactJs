@@ -1,10 +1,11 @@
 import React, {useContext} from "react";
-import {useParams, withRouter} from "react-router-dom";
+import {useParams, useHistory} from "react-router-dom";
 import {FirestoreContext} from "../firebase/Firestore";
 import EditButtons from "../frame/EditButton";
 
 
-function Post({history}) {
+function Post() {
+  const history = useHistory();
   const {url} = useParams();
   const {posts} = useContext(FirestoreContext);
 
@@ -35,4 +36,4 @@ function Post({history}) {
   }
 }
 
-export default withRouter(Post);
+export default Post;

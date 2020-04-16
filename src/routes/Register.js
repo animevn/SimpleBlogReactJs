@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {withRouter, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import firebase from "../firebase/Firebase";
 import {AuthContext} from "../firebase/Auth";
 import Grid from "@material-ui/core/Grid";
@@ -91,5 +91,5 @@ const Register = ()=>{
   );
 };
 
-export default withRouter(Register);
+export default Register;
 

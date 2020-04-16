@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {withRouter, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import firebase from "../firebase/Firebase";
 import {AuthContext} from "../firebase/Auth";
 import Grid from "@material-ui/core/Grid";
@@ -21,7 +21,7 @@ const SignIn = ()=>{
     event.preventDefault();
     const {email, password} = event.target.elements;
     try{
-      firebase.auth().signInWithEmailAndPassword(email.value, password.value);
+      firebase.auth().signInWithEmailAndPassword(email.value, password.value).then();
     }catch (e) {
       alert(e);
     }
@@ -94,5 +94,5 @@ const SignIn = ()=>{
   );
 };
 
-export default withRouter(SignIn);
+export default SignIn;
 

@@ -4,7 +4,6 @@ import UserIcon from "./UserIcon";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
 
 function Header() {
   const history = useHistory();

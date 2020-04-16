@@ -1,10 +1,11 @@
 import React, {useContext, useEffect} from "react";
 import {ShareRoute} from "../frame/ShareRoutes";
 import {AuthContext} from "../firebase/Auth";
-import {withRouter} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {FirestoreContext} from "../firebase/Firestore";
 
-function Home({history}) {
+function Home() {
+  const history = useHistory();
   const {currentUser} = useContext(AuthContext);
   const {setRoute} = useContext(ShareRoute);
   const {posts} = useContext(FirestoreContext);
@@ -66,4 +67,4 @@ function Home({history}) {
   );
 }
 
-export default withRouter(Home);
+export default Home;
