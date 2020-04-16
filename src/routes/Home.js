@@ -3,6 +3,9 @@ import {ShareRoute} from "../frame/ShareRoutes";
 import {AuthContext} from "../firebase/Auth";
 import {useHistory} from "react-router-dom";
 import {FirestoreContext} from "../firebase/Firestore";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from '@material-ui/icons/Add';
+import Box from "@material-ui/core/Box";
 
 function Home() {
   const history = useHistory();
@@ -20,12 +23,12 @@ function Home() {
   };
 
   const addButton = !!currentUser ? (
-    <div className="container pt-1">
-      <button className="btn btn-warning btn-lg float-right text-dark shadow" onClick={onAddClick}>
-        Add post
-      </button>
-    </div>
-  ) : null;
+    <Box>
+      <Fab color="primary" size="medium" onClick={onAddClick}>
+        <AddIcon />
+      </Fab>
+    </Box>
+  ) : <></>;
 
   const showPosts = posts.map((post, index)=>{
     function onUrlClick() {
