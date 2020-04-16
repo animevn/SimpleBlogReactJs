@@ -1,29 +1,29 @@
 import React from "react";
+import Header from "./frame/Header"
 import Footer from "./frame/Footer";
 import {Route, BrowserRouter} from "react-router-dom";
-import Login from "./routes/Login";
 import {AuthProvider} from "./firebase/Auth";
-import SignIn from "./routes/SignIn";
-import Register from "./routes/Register";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import {FirestoreProvider} from "./firebase/Firestore";
 import Home from "./routes/Home";
 import About from "./routes/About";
 import Contact from "./routes/Contact";
-import Header from "./frame/Header";
-import {ShareRouteProvider} from "./frame/ShareRoutes";
 import AddPost from "./routes/AddPost";
-import {FirestoreProvider} from "./firebase/Firestore";
-import Post from "./routes/Post";
 import EditPost from "./routes/EditPost";
+import Post from "./routes/Post";
+import Login from "./routes/Login";
+import SignIn from "./routes/SignIn";
+import Register from "./routes/Register";
+import {ShareRouteProvider} from "./frame/ShareRoutes";
 
 function App() {
-
   return (
-    <div className="main">
-      <div className="container-fluid px-0">
+    <Box display="flex" flexDirection="column" justifyContent="space-between" minHeight="100vh">
+      <Grid>
         {/*app goes in here*/}
 
         <AuthProvider>
-
           <ShareRouteProvider>
             <BrowserRouter>
               <Header/>
@@ -37,20 +37,17 @@ function App() {
               <Route exact path="/register" component={Register}/>
               <Route exact path="/addpost" component={AddPost}/>
               <Route exact path="/editpost" component={EditPost}/>
-
               <FirestoreProvider>
                 <Route path="/:url" component={Post}/>
               </FirestoreProvider>
-
             </BrowserRouter>
           </ShareRouteProvider>
-
         </AuthProvider>
 
         {/*app goes in here*/}
-      </div>
+      </Grid>
       <Footer/>
-    </div>
+    </Box>
   );
 }
 

@@ -1,79 +1,38 @@
-import React, {useContext, useState} from "react";
+import React from "react";
+import {withRouter, useHistory} from "react-router-dom";
 import UserIcon from "./UserIcon";
-import {ShareRoute} from "./ShareRoutes";
-import {withRouter} from "react-router-dom";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Link from "@material-ui/core/Link";
 
-function Header({history}) {
-  const {route} = useContext(ShareRoute);
-  const [navShow, setNavShow] = useState(false);
-
-  function toggler() {
-    setNavShow(old=> !old);
-  }
-
-  function onBigTitleClick(event) {
+function Header() {
+  const history = useHistory();
+  const onTitleClick = (event)=>{
     event.preventDefault();
     history.push("/");
-  }
+  };
 
-  function onHomeClick(event) {
-    event.preventDefault();
-    toggler();
-    history.push("/");
-  }
-
-  function onAboutClick(event) {
-    event.preventDefault();
-    toggler();
-    history.push("/about");
-  }
-
-  function onContactClick(event) {
-    event.preventDefault();
-    toggler();
-    history.push("/contact");
-  }
+  const padding = {xs:0, sm:1, md:1, lg:1, xl:1};
+  const margin = {xs:3, sm:5, md:10, lg:15, xl:20};
+  // const fontSize = {xs:"1.5rem", sm:"2rem", md:"2.5rem", lg:"3rem", xl:"3rem"};
 
   return (
-    <div className="container-fluid bg-warning shadow px-0">
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light py-4 px-0">
+    <Box bgcolor="primary.main" py={{...padding}} boxShadow={3}>
+      <Box fontWeight="fontWeightBold" mx={{...margin}}
+           display="flex" flexDirection="row" justifyContent="space-between" alignItems="center">
+        <Button onClick={onTitleClick}>
+          <Typography component="div" variant="h3">
+            <Box fontWeight={500} color="secondary.main">
+              Simple Blog
+            </Box>
+          </Typography>
+        </Button>
+        <UserIcon/>
+      </Box>
 
-          <button className="btn navbar-toggler navbar-button" onClick={toggler}
-                  data-target="#navbarNav">
-            <span className="navbar-toggler-icon"></span>
-          </button>
+    </Box>
 
-          <div className="row navbar-header">
-            <button className="navbar-brand btn brand-title" onClick={onBigTitleClick}>
-              <div className="brand-text text-center">BLOG WORLD</div>
-            </button>
-
-            <UserIcon/>
-          </div>
-
-          <div className={"collapse navbar-collapse " + (navShow? "show" : "")} id="navbarNav">
-            <ul className="navbar-nav ml-auto">
-              <li className={"nav-item " + route.home}>
-                <button className="nav-link btn font-weight-bold" onClick={onHomeClick}>
-                  HOME
-                </button>
-              </li>
-              <li className={"nav-item " + route.about}>
-                <button className="nav-link btn font-weight-bold" onClick={onAboutClick}>
-                  ABOUT US
-                </button>
-              </li>
-              <li className={"nav-item " + route.contact}>
-                <button className="nav-link btn font-weight-bold" onClick={onContactClick}>
-                  CONTACT US
-                </button>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </div>
   );
 }
 
