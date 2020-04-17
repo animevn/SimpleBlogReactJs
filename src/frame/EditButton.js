@@ -44,7 +44,6 @@ function EditButtons(props) {
           </Button>
         </Box>
 
-
       </Box>
     );
   }else {
