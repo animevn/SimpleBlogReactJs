@@ -8,6 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 function Home() {
   const history = useHistory();
@@ -38,15 +39,15 @@ function Home() {
     }
 
     return (
-      <div key={index} className="container px-0">
+      <Box key={index}>
         <h2>{post.title}</h2>
-        <p className="text-justify my-3">
+        <Typography component="div">
           {post.body.substring(0, 100) + " ..."}
-          <button className="text-link btn mb-1" onClick={onUrlClick}>
-            Read more
-          </button>
-        </p>
-      </div>
+          <Button variant="text" onClick={onUrlClick} style={{"text-transform":"none"}}>
+            <Box color="blue" mb={0.5}>Read more</Box>
+          </Button>
+        </Typography>
+      </Box>
     );
   });
 
