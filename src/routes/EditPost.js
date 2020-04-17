@@ -33,7 +33,7 @@ function EditPost() {
     event.preventDefault();
     const {title, body} = event.target.elements;
     firebase.firestore().collection("blog").doc(location.state.author).collection("blogs")
-    .doc(location.state.postId).update({title:title.value, body:body.value})
+    .doc(location.state.postId).update({title:title.value, body:body.value, time: new Date()})
     .then(()=> history.push("/"));
   }
 

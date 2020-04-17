@@ -6,7 +6,7 @@ export const FirestoreContext = createContext(null);
 export const FirestoreProvider = ({children})=>{
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(null);
-  const group = firebase.firestore().collectionGroup("blogs");
+  const group = firebase.firestore().collectionGroup("blogs").orderBy("time");
 
   useEffect(()=>{
     group.onSnapshot(snapshot => {

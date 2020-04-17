@@ -22,7 +22,8 @@ function AddPost() {
       title:title.value,
       url:url,
       body:body.value,
-      author:currentUser.uid
+      author:currentUser.uid,
+      time: new Date()
     };
     firebase.firestore().collection("blog").doc(currentUser.uid).collection("blogs").doc().set(post)
     .then(()=> history.push("/"));
