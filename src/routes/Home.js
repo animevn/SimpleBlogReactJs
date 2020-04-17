@@ -6,6 +6,8 @@ import {FirestoreContext} from "../firebase/Firestore";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from '@material-ui/icons/Add';
 import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
 
 function Home() {
   const history = useHistory();
@@ -49,23 +51,30 @@ function Home() {
   });
 
   return (
-    <div className="container">
+    <Container>
 
       {addButton}
 
-      <h2 className="pt-4 home">Home</h2>
-      <p className="text-justify my-3">
-        &emsp; Sherlock Holmes is a fictional private detective created by British author Sir Arthur
-        Conan
-        Doyle. Referring to himself as a "consulting detective" in the stories, Holmes is known for
-        his proficiency with observation, deduction, forensic science, and logical reasoning that
-        borders on the fantastic, which he employs when investigating cases for a wide variety of
-        clients, including Scotland Yard.
-      </p>
+      <Typography componet="div" variant="h4">
+        <Box color="secondary.main" mt={2} fontWeight="fontWeightBold">
+          Home
+        </Box>
+      </Typography>
+
+      <Typography component="div">
+        <Box mt={2} fontWeight="fontWeightRegular" textAlign="justify">
+          &emsp; Sherlock Holmes is a fictional private detective created by British author Sir Arthur
+          Conan
+          Doyle. Referring to himself as a "consulting detective" in the stories, Holmes is known for
+          his proficiency with observation, deduction, forensic science, and logical reasoning that
+          borders on the fantastic, which he employs when investigating cases for a wide variety of
+          clients, including Scotland Yard.
+        </Box>
+      </Typography>
 
       {showPosts}
 
-    </div>
+    </Container>
 
   );
 }
