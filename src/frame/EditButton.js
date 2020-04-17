@@ -19,7 +19,7 @@ function EditButtons(props) {
 
   const onDeleteClick = ()=>{
     firebase.firestore().collection("blog").doc(props.post.author).collection("blogs")
-    .doc(props.post.postId).delete().then();
+    .doc(props.post.postId).delete();
     props.backToHome();
   };
 

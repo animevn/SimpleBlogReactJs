@@ -33,6 +33,25 @@ function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(()=>{
+    document.addEventListener('scroll', trackScrolling);
+    return ()=>{
+      document.removeEventListener('scroll', trackScrolling);
+    }
+  });
+
+  function isBottom(el) {
+    return el.getBoundingClientRect().bottom <= window.innerHeight;
+  }
+
+  const trackScrolling = ()=>{
+    const wrappedElement = document.getElementById('justatest');
+    if (isBottom(wrappedElement)) {
+      setLimit(old=>old + 5);
+      document.removeEventListener('scroll', trackScrolling);
+    }
+  };
+
   const onAddClick = ()=>{
     // history.push("/addpost");
     setLimit(old=>old + 5);
@@ -57,19 +76,19 @@ function Home() {
 
   const showHomePosts = ()=>{
     return (
-      <>
+      <div id="justatest">
         {showPosts}
         {loading && progressBar}
-      </>
+      </div>
     )
   };
 
-  const showPosts = posts.map((post)=>{
+  const showPosts = posts.map((post, index)=>{
     function onUrlClick() {
       history.push(post.url);
     }
     return (
-      <Box key={post.title}>
+      <Box key={index}>
         <Typography componet="div" variant="h5">
           <Box color="secondary.main" mt={2} fontWeight="fontWeightBold">
             {post.title}
