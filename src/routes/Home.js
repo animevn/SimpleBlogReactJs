@@ -9,9 +9,20 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Zoom from "@material-ui/core/Zoom";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme)=>({
+  fab: {
+    position: "fixed",
+    bottom: theme.spacing(10),
+    right: theme.spacing(5),
+  },
+}));
 
 function Home() {
+  const classes = useStyles();
   const history = useHistory();
   const {currentUser} = useContext(AuthContext);
   const {setRoute} = useContext(ShareRoute);
@@ -27,11 +38,11 @@ function Home() {
   };
 
   const addButton = !!currentUser ? (
-    <Box>
-      <Fab color="primary" size="medium" onClick={onAddClick}>
+    <Zoom timeout={1000} in="true" unmountOnExit>
+      <Fab className={classes.fab} color="primary" size="medium" onClick={onAddClick}>
         <AddIcon />
       </Fab>
-    </Box>
+    </Zoom>
   ) : <></>;
 
   const showHomePosts = ()=>{
