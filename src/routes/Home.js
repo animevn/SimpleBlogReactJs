@@ -53,9 +53,7 @@ function Home() {
   };
 
   const onAddClick = ()=>{
-    // history.push("/addpost");
-    setLimit(old=>old + 5);
-    // setLastRecord(medium);
+    history.push("/addpost");
   };
 
   const addButton = !!currentUser ? (

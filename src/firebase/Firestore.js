@@ -12,16 +12,14 @@ export const FirestoreProvider = ({children})=>{
 
   useEffect(()=>{
     const group = firebase.firestore().collectionGroup("blogs").orderBy("time", "desc");
-    // let temp = [];
-
     group.limit(limit).onSnapshot(snapshot => {
       setLoading(true);
-      // snapshot.forEach(doc=>temp.push({...doc.data(), postId: doc.id}));
-      setPosts([]);
-      snapshot.forEach(doc=>setPosts(old=>old.concat({...doc.data(), postId: doc.id})));
+      let temp = [];
+      snapshot.forEach(doc=>temp.push({...doc.data(), postId: doc.id}));
+      setPosts(temp);
       setLoading(false);
     });
-    // setPosts(temp);
+
   }, [limit]);
 
   // //lazyload this way not very good because can not update latest change
