@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {useParams, useHistory} from "react-router-dom";
 import {FirestoreContext} from "../firebase/Firestore";
 import EditButtons from "../frame/EditButton";
@@ -8,6 +8,10 @@ function Post() {
   const history = useHistory();
   const {url} = useParams();
   const {posts} = useContext(FirestoreContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const showPost = posts.filter(post=> {return post.url === url});
 

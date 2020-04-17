@@ -2,6 +2,13 @@ import React, {useContext} from "react";
 import firebase from "../firebase/Firebase";
 import {AuthContext} from "../firebase/Auth";
 import {useHistory} from "react-router-dom";
+import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox/Checkbox";
+const width = {xs:"90%", sm:"550px", md:"550px", lg:"550px", xl:"550px"};
 
 function AddPost() {
   const history = useHistory();
@@ -22,53 +29,49 @@ function AddPost() {
   }
 
   return (
-    <div className="container mt-4 px-0 mx-auto">
+    <Container>
+      <Box display="flex" flexDirection="row" justifyContent="center" mt={2}>
+        <Box component="form" onSubmit={handleSubmit}
+             display="flex" flexDirection="column" justifyContent="center" alignItems="center"
+             width={width} >
 
-      <div className="card col-sm-12 col-11 shadow-sm p-4 mx-auto">
-        <form className="was-validated" onSubmit={handleSubmit}>
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text bg-warning">Post Title</span>
-            </div>
-            <input type="text" className="form-control" id="post_title" autoComplete="on"
-                   placeholder="Post title" aria-label="" name="title" required/>
-              <div className="valid-feedback">
-                Title OK.
-              </div>
-              <div className="invalid-feedback">
-                Please fill title of post
-              </div>
-          </div>
+          <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center"
+               borderRadius={5} pl={1} overflow="hidden" height={45} boxShadow={3}
+               mt={5} bgcolor="primary.main" width={1} >
+            <Box width={0.25}>
+              <Typography>Post Title</Typography>
+            </Box>
 
-          <div className="input-group mb-3">
-            <textarea className="form-control text-justify" id="text_area"
-                  name="body" rows="5" placeholder="Post body" required>
-            </textarea>
-            <div className="valid-feedback">
-              Post content OK.
-            </div>
-            <div className="invalid-feedback">
-              Please fill post body
-            </div>
-          </div>
+            <Box component="input" fontSize={20} width={0.75} height={1} borderColor="transparent"
+                 id="title" name="title" required/>
+          </Box>
 
-          <div className="form-group form-check">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox"
-                     name="remember" required /> I agree on conditions.
-                <div className="valid-feedback">
-                  Requirement OK.
-                </div>
-                <div className="invalid-feedback">
-                  Check this checkbox to continue.
-                </div>
-            </label>
-          </div>
-          <button type="submit" className="btn btn-warning">Submit</button>
-        </form>
-      </div>
+          <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center"
+               borderRadius={5} pl={1} overflow="hidden" boxShadow={3} borderColor="transparent"
+               mt={5} width={1} component="textarea" rows="5" fontSize="1.2rem" required
+               id="body" name="body">
 
-    </div>
+          </Box>
+
+          <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center"
+               width={0.6} mt={1}>
+            <FormControlLabel control={
+              <Checkbox color="secondary"/>
+            } label={
+              <Box color="secondary.main">
+                Remember me.
+              </Box>
+            } />
+          </Box>
+
+          <Button type="submit" variant="outlined" color="secondary" size="large">
+            Submit
+          </Button>
+
+        </Box>
+
+      </Box>
+    </Container>
   )
 }
 
