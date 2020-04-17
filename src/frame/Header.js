@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import UserIcon from "./UserIcon";
 import Box from "@material-ui/core/Box";
@@ -31,8 +31,8 @@ function Header() {
   const history = useHistory();
   const classes = useStyles();
   const match = useMediaQuery("(min-width:960px)");
+  const [state, setState] = useState(false);
 
-  const [state, setState] = React.useState(false);
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {

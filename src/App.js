@@ -22,15 +22,13 @@ function App() {
     <Box display="flex" flexDirection="column" justifyContent="space-between" minHeight="100vh">
       <Grid>
         {/*app goes in here*/}
-
         <AuthProvider>
           <ShareRouteProvider>
             <BrowserRouter>
-              <FirestoreProvider>
-                <Header/>
-              </FirestoreProvider>
+              <Header/>
               <FirestoreProvider>
                 <Route exact path="/" component={Home}/>
+                <Route path="/:url" component={Post}/>
               </FirestoreProvider>
               <Route exact path="/about" component={About}/>
               <Route exact path="/contact" component={Contact}/>
@@ -39,9 +37,6 @@ function App() {
               <Route exact path="/register" component={Register}/>
               <Route exact path="/addpost" component={AddPost}/>
               <Route exact path="/editpost" component={EditPost}/>
-              <FirestoreProvider>
-                <Route path="/:url" component={Post}/>
-              </FirestoreProvider>
             </BrowserRouter>
           </ShareRouteProvider>
         </AuthProvider>

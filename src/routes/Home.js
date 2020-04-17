@@ -26,16 +26,17 @@ function Home() {
   const history = useHistory();
   const {currentUser} = useContext(AuthContext);
   const {setRoute} = useContext(ShareRoute);
-  const {posts, loading} = useContext(FirestoreContext);
+  const {posts, loading, setLimit} = useContext(FirestoreContext);
 
   useEffect(()=>{
     setRoute({home:"active", about:"", contact:""});
-    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onAddClick = ()=>{
-    history.push("/addpost");
+    // history.push("/addpost");
+    setLimit(old=>old + 5);
+    // setLastRecord(medium);
   };
 
   const addButton = !!currentUser ? (
@@ -46,24 +47,21 @@ function Home() {
     </Zoom>
   ) : <></>;
 
+  const progressBar = (
+    <Box display="flex" justifyContent="space-around">
+      <CircularProgress/>
+      <CircularProgress color="secondary"/>
+      <CircularProgress color="primary"/>
+    </Box>
+  );
+
   const showHomePosts = ()=>{
-    if (posts.length === 0){
-      if (loading === null){
-        return (
-          <Box display="flex" justifyContent="space-around">
-            <CircularProgress/>
-            <CircularProgress color="secondary"/>
-            <CircularProgress color="primary"/>
-          </Box>
-        )
-      }else {
-        return (
-          <></>
-        );
-      }
-    }else {
-      return showPosts;
-    }
+    return (
+      <>
+        {showPosts}
+        {loading && progressBar}
+      </>
+    )
   };
 
   const showPosts = posts.map((post)=>{

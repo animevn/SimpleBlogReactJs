@@ -26,6 +26,11 @@ function UserIcon() {
     setAnchorEl(null);
   };
 
+  const onAddClick = ()=>{
+    setAnchorEl(null);
+    history.push("/addpost");
+  };
+
   function onLogoutClick() {
     setAnchorEl(null);
     if (currentUser){
@@ -65,7 +70,7 @@ function UserIcon() {
           >
             <MenuItem>{currentUser.email}</MenuItem>
             <Divider/>
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={onAddClick}>Profile</MenuItem>
             <MenuItem onClick={onDeleteUser}>Delete my account</MenuItem>
             <MenuItem onClick={onLogoutClick}>Logout</MenuItem>
           </Menu>
