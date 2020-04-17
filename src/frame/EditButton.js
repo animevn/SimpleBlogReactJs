@@ -1,9 +1,20 @@
 import React, {useContext} from "react";
 import {AuthContext} from "../firebase/Auth";
 import firebase from "../firebase/Firebase";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme)=>({
+  box: {
+    position: "fixed",
+    bottom: theme.spacing(10),
+    right: theme.spacing(5),
+  },
+}));
 
 function EditButtons(props) {
-
+  const classes = useStyles();
   const {currentUser} = useContext(AuthContext);
 
   const onDeleteClick = ()=>{
@@ -18,23 +29,26 @@ function EditButtons(props) {
 
   if (currentUser && currentUser.uid === props.post.author){
     return (
-      <div className="container pt-1">
-        <div className="btn-group float-right shadow">
-          <form className="btn-group">
-            <button className="btn btn-group btn-success btn-lg" onClick={onEditClick}>
-              &nbsp; Edit &nbsp;
-            </button>
-          </form>
-          <form className="btn-group float-right">
-            <button className="btn btn-group btn-danger float-right btn-lg" onClick={onDeleteClick}>
-              Delete
-            </button>
-          </form>
-        </div>
-      </div>
+      <Box className={classes.box} mr={0} ml="auto" mt={1} border={1} borderColor="red"
+           borderRadius={3} boxShadow={3}
+           flexDirection="row" justifyContent="center" display="flex">
+        <Box width={0.5}>
+          <Button variant="text" color="secondary" onClick={onEditClick}>
+            Edit
+          </Button>
+        </Box>
+
+        <Box width={0.5} borderLeft={1} borderColor="red">
+          <Button variant="text" color="secondary" onClick={onDeleteClick}>
+            Delete
+          </Button>
+        </Box>
+
+
+      </Box>
     );
   }else {
-    return <div></div>;
+    return <></>;
   }
 }
 

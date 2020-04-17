@@ -2,7 +2,9 @@ import React, {useContext, useEffect} from "react";
 import {useParams, useHistory} from "react-router-dom";
 import {FirestoreContext} from "../firebase/Firestore";
 import EditButtons from "../frame/EditButton";
-
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 function Post() {
   const history = useHistory();
@@ -26,14 +28,26 @@ function Post() {
   if (showPost.length > 0){
     const post = showPost[0];
     return (
-      <div className="container">
-        <EditButtons post={post} backToHome={comeback} backToEdit={edit}/>
+      <Container>
+        <Box>
 
-        <div className="container mt-1">
-          <h2 className="pt-4">{post.title}</h2>
-          <p className="text-justify my-3">{post.body}</p>
-        </div>
-      </div>
+          <EditButtons post={post} backToHome={comeback} backToEdit={edit}/>
+
+          <Typography componet="div" variant="h5">
+            <Box color="secondary.main" mt={2} fontWeight="fontWeightBold">
+              {post.title}
+            </Box>
+          </Typography>
+
+          <Typography component="div">
+            <Box mt={1} fontWeight="fontWeightRegular" textAlign="justify">
+              {post.body}
+            </Box>
+          </Typography>
+
+        </Box>
+
+      </Container>
     )
   }else {
     return <div></div>;
