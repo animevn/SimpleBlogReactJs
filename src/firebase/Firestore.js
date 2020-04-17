@@ -11,7 +11,6 @@ export const FirestoreProvider = ({children})=>{
   useEffect(()=>{
     group.onSnapshot(snapshot => {
       setLoading(snapshot.size);
-      // alert(snapshot.size + " - " + posts.length);
       setPosts([]);
       snapshot.forEach(doc=>setPosts(old=>[{...doc.data(), postId: doc.id}, ...old]));
     });

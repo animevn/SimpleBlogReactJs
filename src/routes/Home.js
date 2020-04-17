@@ -39,7 +39,7 @@ function Home() {
   };
 
   const addButton = !!currentUser ? (
-    <Zoom timeout={1000} in="true" unmountOnExit>
+    <Zoom timeout={1000} in={true} unmountOnExit>
       <Fab className={classes.fab} color="primary" size="medium" onClick={onAddClick}>
         <AddIcon />
       </Fab>
@@ -72,7 +72,6 @@ function Home() {
     }
     return (
       <Box key={post.title}>
-
         <Typography componet="div" variant="h5">
           <Box color="secondary.main" mt={2} fontWeight="fontWeightBold">
             {post.title}
@@ -87,7 +86,6 @@ function Home() {
             </Button>
           </Box>
         </Typography>
-
       </Box>
     );
 

@@ -26,7 +26,9 @@ function App() {
         <AuthProvider>
           <ShareRouteProvider>
             <BrowserRouter>
-              <Header/>
+              <FirestoreProvider>
+                <Header/>
+              </FirestoreProvider>
               <FirestoreProvider>
                 <Route exact path="/" component={Home}/>
               </FirestoreProvider>
