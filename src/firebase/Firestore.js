@@ -5,10 +5,13 @@ export const FirestoreContext = createContext(null);
 
 export const FirestoreProvider = ({children})=>{
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(null);
   const group = firebase.firestore().collectionGroup("blogs");
 
   useEffect(()=>{
     group.onSnapshot(snapshot => {
+      setLoading(snapshot.size);
+      // alert(snapshot.size + " - " + posts.length);
       setPosts([]);
       snapshot.forEach(doc=>setPosts(old=>[{...doc.data(), postId: doc.id}, ...old]));
     });
@@ -16,7 +19,7 @@ export const FirestoreProvider = ({children})=>{
   }, []);
 
   return (
-    <FirestoreContext.Provider value={{posts}}>
+    <FirestoreContext.Provider value={{posts, loading}}>
       {children}
     </FirestoreContext.Provider>
   );

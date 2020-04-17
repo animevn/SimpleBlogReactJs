@@ -9,12 +9,13 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 function Home() {
   const history = useHistory();
   const {currentUser} = useContext(AuthContext);
   const {setRoute} = useContext(ShareRoute);
-  const {posts} = useContext(FirestoreContext);
+  const {posts, loading} = useContext(FirestoreContext);
 
   useEffect(()=>{
     setRoute({home:"active", about:"", contact:""});
@@ -33,22 +34,51 @@ function Home() {
     </Box>
   ) : <></>;
 
-  const showPosts = posts.map((post, index)=>{
+  const showHomePosts = ()=>{
+    if (posts.length === 0){
+      if (loading === null){
+        return (
+          <Box display="flex" justifyContent="space-around">
+            <CircularProgress/>
+            <CircularProgress color="secondary"/>
+            <CircularProgress color="primary"/>
+          </Box>
+        )
+      }else {
+        return (
+          <></>
+        );
+      }
+    }else {
+      return showPosts;
+    }
+  };
+
+  const showPosts = posts.map((post)=>{
     function onUrlClick() {
       history.push(post.url);
     }
-
     return (
-      <Box key={index}>
-        <h2>{post.title}</h2>
-        <Typography component="div">
-          {post.body.substring(0, 100) + " ..."}
-          <Button variant="text" onClick={onUrlClick} style={{"text-transform":"none"}}>
-            <Box color="blue" mb={0.5}>Read more</Box>
-          </Button>
+      <Box key={post.title}>
+
+        <Typography componet="div" variant="h5">
+          <Box color="secondary.main" mt={2} fontWeight="fontWeightBold">
+            {post.title}
+          </Box>
         </Typography>
+
+        <Typography component="div">
+          <Box mt={1} fontWeight="fontWeightRegular" textAlign="justify">
+            {post.body.substring(0, 200) + " ..."}
+            <Button variant="text" onClick={onUrlClick} style={{"textTransform":"none"}}>
+              <Box color="blue" mb={0.5}>Read more</Box>
+            </Button>
+          </Box>
+        </Typography>
+
       </Box>
     );
+
   });
 
   return (
@@ -63,7 +93,7 @@ function Home() {
       </Typography>
 
       <Typography component="div">
-        <Box mt={2} fontWeight="fontWeightRegular" textAlign="justify">
+        <Box my={2} fontWeight="fontWeightRegular" textAlign="justify">
           &emsp; Sherlock Holmes is a fictional private detective created by British author Sir Arthur
           Conan
           Doyle. Referring to himself as a "consulting detective" in the stories, Holmes is known for
@@ -73,7 +103,7 @@ function Home() {
         </Box>
       </Typography>
 
-      {showPosts}
+      {showHomePosts()}
 
     </Container>
 
