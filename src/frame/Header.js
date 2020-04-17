@@ -9,8 +9,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {makeStyles} from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import Container from "@material-ui/core/Container";
 import ListItemText from "@material-ui/core/ListItemText";
 import Drawer from '@material-ui/core/Drawer';
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const padding = {xs:0, sm:1, md:1, lg:1, xl:1};
 const margin = {xs:3, sm:5, md:10, lg:15, xl:20};
@@ -28,6 +30,7 @@ const useStyles = makeStyles({
 function Header() {
   const history = useHistory();
   const classes = useStyles();
+  const match = useMediaQuery("(min-width:960px)");
 
   const [state, setState] = React.useState(false);
 
@@ -46,68 +49,125 @@ function Header() {
     history.push("/contact");
   }
 
-  const list = ()=>(
-    <div className={classes.list} role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    >
-      <Box bgcolor="background.default" height="100vh" pt={5}>
-
-        <Button variant="outlined" color="secondary">
-          Just choose it
-        </Button>
-
-        <List>
-          <ListItem button onClick={onTitleClick}>
-            <ListItemText primary="Home" />
-          </ListItem>
-
-          <ListItem button onClick={onAbout}>
-            <ListItemText primary="About" />
-          </ListItem>
-
-          <ListItem button onClick={onContact}>
-            <ListItemText primary="Contact" />
-          </ListItem>
-        </List>
-      </Box>
-
-    </div>
-  );
-
   const onTitleClick = (event)=>{
     event.preventDefault();
     history.push("/");
   };
 
-  return (
-    <Box bgcolor="primary.main" py={{...padding}} boxShadow={3}>
 
-      <Box fontWeight="fontWeightBold" mx={{...margin}}
-           display="flex" flexDirection="row" justifyContent="space-between" alignItems="center">
+  const navBarList = (
+    <List>
+      <ListItem button onClick={onTitleClick}>
+        <ListItemText primary="Home" />
+      </ListItem>
 
-        <>
-          <IconButton color="secondary" onClick={toggleDrawer(true)}>
-            <Box fontSize={50} display="flex" flexDirection="row" justifyContent="center">
-              <MenuIcon color="secondary" fontSize="inherit"/>
-            </Box>
-          </IconButton>
-          <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
-            {list()}
-          </Drawer>
-        </>
+      <ListItem button onClick={onAbout}>
+        <ListItemText primary="About" />
+      </ListItem>
 
-        <Button onClick={onTitleClick}>
-          <Typography component="div" variant="h3">
-            <Box fontWeight={500} color="secondary.main">
-              Simple Blog
-            </Box>
-          </Typography>
+      <ListItem button onClick={onContact}>
+        <ListItemText primary="Contact" />
+      </ListItem>
+    </List>
+  );
+
+  const listOfNavItems = ()=>(
+    <div className={classes.list} role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <Box bgcolor="background.default" height="100vh" pt={5}>
+        <Button variant="outlined" color="secondary">
+          Just choose it
         </Button>
+        {navBarList}
+      </Box>
+
+    </div>
+  );
+
+  const menu = (
+    <>
+      <IconButton color="secondary" onClick={toggleDrawer(true)}>
+        <Box fontSize={50} display="flex" flexDirection="row" justifyContent="center">
+          <MenuIcon color="secondary" fontSize="inherit"/>
+        </Box>
+      </IconButton>
+      <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
+        {listOfNavItems()}
+      </Drawer>
+    </>
+  );
+
+  const titleName = (
+    <Button onClick={onTitleClick}>
+      <Typography component="div" variant="h3">
+        <Box fontWeight={500} color="secondary.main">
+          Simple Blog
+        </Box>
+      </Typography>
+    </Button>
+  );
+
+  const headerFor960Down = (
+    <Box fontWeight="fontWeightBold"
+         display="flex" flexDirection="row" justifyContent="space-between" alignItems="center">
+      {menu}
+      {titleName}
+      <UserIcon/>
+    </Box>
+  );
+
+  const headerFor960Up = (
+    <Box fontWeight="fontWeightBold" mx={{...margin}}
+         display="flex" flexDirection="row" justifyContent="space-between">
+      <Box display="flex" flexDirection="row" justifyContent="flex-start" alignItems="center">
         <UserIcon/>
+        {titleName}
+      </Box>
+
+      <Box display="flex" width={0.4}
+           flexDirection="row" justifyContent="space-between" alignItems="flex-end">
+
+        <Box width={0.33}>
+          <Button fullWidth variant="text" color="secondary" onClick={onTitleClick} >
+            <Typography variant="h6">Home</Typography>
+          </Button>
+        </Box>
+
+        <Box width={0.33}>
+          <Button fullWidth variant="text" color="secondary" onClick={onAbout} >
+            <Typography variant="h6">About</Typography>
+          </Button>
+        </Box>
+
+        <Box width={0.33}>
+          <Button fullWidth variant="text" color="secondary" onClick={onContact} >
+            <Typography variant="h6">Contact</Typography>
+          </Button>
+        </Box>
 
       </Box>
 
+    </Box>
+  );
+
+  const header = ()=>{
+    if (match){
+      return headerFor960Up;
+    }else {
+      return headerFor960Down;
+    }
+  };
+
+
+  return (
+    <Box bgcolor="primary.main" boxShadow={3}>
+      <Container>
+        <Box py={{...padding}}>
+          {header()}
+        </Box>
+      </Container>
     </Box>
 
   );

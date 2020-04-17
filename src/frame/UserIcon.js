@@ -47,7 +47,7 @@ function UserIcon() {
   if (currentUser){
     return (
       <Box display="flex" flexDirection="row" justifyContent="center">
-        <Box >
+        <Box>
           <IconButton color="secondary" onClick={handleClick}>
             <Box fontSize={iconSize} display="flex" flexDirection="row" justifyContent="center">
               <AccountCircleIcon color="secondary" fontSize="inherit"/>
