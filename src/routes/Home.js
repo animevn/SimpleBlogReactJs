@@ -26,7 +26,7 @@ function Home() {
   const history = useHistory();
   const {currentUser} = useContext(AuthContext);
   const {setRoute} = useContext(ShareRoute);
-  const {posts, loading, setLimit} = useContext(FirestoreContext);
+  const {posts, loading, setLimit, limit, max, setLoading} = useContext(FirestoreContext);
 
   useEffect(()=>{
     setRoute({home:"active", about:"", contact:""});
@@ -47,7 +47,11 @@ function Home() {
   const trackScrolling = ()=>{
     const wrappedElement = document.getElementById('justatest');
     if (isBottom(wrappedElement)) {
-      setLimit(old=>old + 5);
+      if (limit< max) {
+        setLimit(old=>old + 5);
+      }else {
+        setLoading(false);
+      }
       document.removeEventListener('scroll', trackScrolling);
     }
   };
@@ -65,18 +69,25 @@ function Home() {
   ) : <></>;
 
   const progressBar = (
-    <Box display="flex" justifyContent="space-around">
+    <Box display="flex" justifyContent="space-around" my={2}>
       <CircularProgress/>
       <CircularProgress color="secondary"/>
       <CircularProgress color="primary"/>
     </Box>
   );
 
+  const showProgressBar = ()=>{
+    if (loading){
+      return progressBar;
+    }else {
+      return (<></>)
+    }
+  };
+
   const showHomePosts = ()=>{
     return (
       <div id="justatest">
         {showPosts}
-        {loading && progressBar}
       </div>
     )
   };
@@ -129,7 +140,7 @@ function Home() {
       </Typography>
 
       {showHomePosts()}
-
+      {showProgressBar()}
     </Container>
 
   );

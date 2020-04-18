@@ -7,19 +7,20 @@ export const FirestoreProvider = ({children})=>{
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [limit, setLimit] = useState(10);
+  const [max, setMax] = useState();
   // const [lastRecord, setLastRecord] = useState(null);
   // const [medium, setMedium] = useState(null);
 
   useEffect(()=>{
     const group = firebase.firestore().collectionGroup("blogs").orderBy("time", "desc");
+    setLoading(true);
+    group.onSnapshot(snapshot => setMax(snapshot.size));
     group.limit(limit).onSnapshot(snapshot => {
-      setLoading(true);
       let temp = [];
       snapshot.forEach(doc=>temp.push({...doc.data(), postId: doc.id}));
       setPosts(temp);
-      setLoading(false);
     });
-
+    return ()=>setLoading(false);
   }, [limit]);
 
   // //lazyload this way not very good because can not update latest change
@@ -54,7 +55,7 @@ export const FirestoreProvider = ({children})=>{
   // }, [lastRecord]);
 
   return (
-    <FirestoreContext.Provider value={{posts, loading, limit, setLimit}}>
+    <FirestoreContext.Provider value={{posts, loading, limit, setLimit, max, setLoading}}>
       {children}
     </FirestoreContext.Provider>
   );
