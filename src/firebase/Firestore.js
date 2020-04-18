@@ -6,7 +6,7 @@ export const FirestoreContext = createContext(null);
 export const FirestoreProvider = ({children})=>{
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(9);
   const [max, setMax] = useState();
   // const [lastRecord, setLastRecord] = useState(null);
   // const [medium, setMedium] = useState(null);
@@ -19,8 +19,9 @@ export const FirestoreProvider = ({children})=>{
       let temp = [];
       snapshot.forEach(doc=>temp.push({...doc.data(), postId: doc.id}));
       setPosts(temp);
+      setLoading(false);
     });
-    return ()=>setLoading(false);
+    // return ()=>setLoading(false);
   }, [limit]);
 
   // //lazyload this way not very good because can not update latest change

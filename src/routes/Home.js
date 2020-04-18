@@ -48,7 +48,7 @@ function Home() {
     const wrappedElement = document.getElementById('justatest');
     if (isBottom(wrappedElement)) {
       if (limit< max) {
-        setLimit(old=>old + 5);
+        setLimit(old=>old + 3);
       }else {
         setLoading(false);
       }
